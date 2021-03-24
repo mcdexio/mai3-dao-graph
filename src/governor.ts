@@ -6,7 +6,7 @@ import {
     ProposalCreated as ProposalCreatedEvent,
     ProposalExecuted as ProposalExecutedEvent,
     VoteCast as VoteCastEvent,
-} from '../generated/templates/Governor/Governor'
+} from '../generated/Governor/Governor'
 
 import {
     BI_18,
@@ -22,6 +22,15 @@ export function handleProposalCreated(event: ProposalCreatedEvent): void {
     let proposal = new Proposal(proposalId)
     let user = fetchUser(event.params.proposer)
     proposal.proposer = user.id
+    let targets = event.params.targets as Address[]
+    proposal.targets = []
+    let targetsStr = proposal.targets
+    
+    for (let index = 0; index < event.params.targets.length; index++) {
+        targetsStr.push(targets[index].toHexString())
+    }
+    proposal.targets = targetsStr
+    proposal.values = event.params.values
     proposal.signatures = event.params.signatures
     proposal.calldatas = event.params.calldatas
     proposal.timestamp = event.block.timestamp

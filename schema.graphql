@@ -9,6 +9,8 @@ type Proposal @entity {
     # governor contract address + "-" + proposal index
     id: ID!
     proposer: User!
+    targets: [String!]
+    values: [BigInt!]
     signatures: [String!]
     description: String!
     calldatas: [Bytes!]
