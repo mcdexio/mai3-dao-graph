@@ -16,9 +16,7 @@ import {
 } from './utils'
 
 export function handleProposalCreated(event: ProposalCreatedEvent): void {
-    let proposalId = event.address.toHexString()
-        .concat("-")
-        .concat(event.params.id.toString())
+    let proposalId = event.params.id.toString()
     let proposal = new Proposal(proposalId)
     let user = fetchUser(event.params.proposer)
     proposal.proposer = user.id
