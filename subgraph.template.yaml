@@ -1,0 +1,30 @@
+specVersion: 0.0.2
+description: mai3-dao-graph
+repository: https://github.com/mcdexio/mai3-dao-graph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Governor
+    network: {{network}}
+    source:
+      address: '{{governor_address}}'
+      abi: Governor
+      startBlock: {{start_block}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Proposal
+      abis:
+        - name: Governor
+          file: ./abis/Governor.json
+      eventHandlers:
+        - event: ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,uint256,string)
+          handler: handleProposalCreated
+        - event: ProposalExecuted(uint256)
+          handler: handleProposalExecuted
+        - event: VoteCast(address,uint256,bool,uint256)
+          handler: handleVote
+      file: ./src/governor.ts

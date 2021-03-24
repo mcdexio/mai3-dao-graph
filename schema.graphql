@@ -1,0 +1,33 @@
+type User @entity {
+    # user address
+    id: ID!
+    proposals: [Proposal!] @derivedFrom(field:"proposer")
+    votes: [Vote!] @derivedFrom(field:"voter")
+}
+
+type Proposal @entity {
+    # governor contract address + "-" + proposal index
+    id: ID!
+    proposer: User!
+    signatures: [String!]
+    description: String!
+    calldatas: [Bytes!]
+    startBlock: BigInt!
+    endBlock: BigInt!
+    quorumVotes: BigDecimal!
+    for: BigDecimal!
+    against: BigDecimal!
+    isExecuted: Boolean!
+    timestamp: BigInt!
+    votes: [Vote!] @derivedFrom(field: "proposal")
+}
+
+type Vote @entity {
+    # proposal id + "-" + user address
+    id: ID!
+    voter: User!
+    proposal: Proposal!
+    support: Boolean!
+    votes: BigDecimal!
+    timestamp: BigInt!
+}
