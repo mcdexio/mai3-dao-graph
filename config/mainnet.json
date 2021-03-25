@@ -1,5 +1,6 @@
 {
     "network": "mainnet",
-    "governor_address": "0xF55cF7BbaF548115DCea6DF10c57DF7c7eD88b9b",
-    "start_block": 23370949
+    "governor_address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+    "xmcb_address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "start_block": 1073893
 }

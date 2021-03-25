@@ -1,6 +1,8 @@
 type User @entity {
     # user address
     id: ID!
+    delegatee: User
+    delegators: [User!] @derivedFrom(field:"delegatee")
     proposals: [Proposal!] @derivedFrom(field:"proposer")
     votes: [Vote!] @derivedFrom(field:"voter")
 }

@@ -28,3 +28,23 @@ dataSources:
         - event: VoteCast(address,uint256,bool,uint256)
           handler: handleVote
       file: ./src/governor.ts
+  - kind: ethereum/contract
+    name: Governor
+    network: {{network}}
+    source:
+      address: '{{xmcb_address}}'
+      abi: xmcb
+      startBlock: {{start_block}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Proposal
+      abis:
+        - name: xmcb
+          file: ./abis/xmcb.json
+      eventHandlers:
+        - event: DelegateChanged(indexed address,indexed address,indexed address)
+          handler: handleDelegateChanged
+      file: ./src/xmcb.ts
