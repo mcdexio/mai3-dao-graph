@@ -5,6 +5,8 @@ import { Proposal, Vote } from '../generated/schema'
 import { 
     ProposalCreated as ProposalCreatedEvent,
     ProposalExecuted as ProposalExecutedEvent,
+    ProposalCanceled as ProposalCanceledEvent,
+    ProposalQueued as ProposalQueuedEvent,
     VoteCast as VoteCastEvent,
 } from '../generated/Governor/Governor'
 
@@ -14,6 +16,7 @@ import {
     ZERO_BD,
     fetchUser,
     fetchDao,
+    ZERO_BI,
 } from './utils'
 
 export function handleProposalCreated(event: ProposalCreatedEvent): void {
@@ -41,6 +44,8 @@ export function handleProposalCreated(event: ProposalCreatedEvent): void {
     proposal.for = ZERO_BD
     proposal.against = ZERO_BD
     proposal.isExecuted = false
+    proposal.isCancel = false
+    proposal.eta = ZERO_BI
     proposal.save()
     dao.proposalCount += 1
     dao.save()
@@ -48,9 +53,7 @@ export function handleProposalCreated(event: ProposalCreatedEvent): void {
   
 export function handleVote(event: VoteCastEvent): void {
     let user = fetchUser(event.params.voter)
-    let proposalId = event.address.toHexString()
-        .concat("-")
-        .concat(event.params.proposalId.toString())
+    let proposalId = event.params.proposalId.toString()
     let proposal = Proposal.load(proposalId)
     let vote = new Vote(proposalId.concat('-').concat(user.id))
     vote.timestamp = event.block.timestamp
@@ -68,10 +71,22 @@ export function handleVote(event: VoteCastEvent): void {
 }
 
 export function handleProposalExecuted(event: ProposalExecutedEvent): void {
-    let proposalId = event.address.toHexString()
-        .concat("-")
-        .concat(event.params.id.toString())
+    let proposalId = event.params.id.toString()
     let proposal = Proposal.load(proposalId)
     proposal.isExecuted = true
     proposal.save()
+}
+
+export function handleProposalQueued(event: ProposalQueuedEvent): void {
+    let proposalId = event.params.id.toString()
+    let proposal = Proposal.load(proposalId)
+    proposal.eta = event.params.eta
+    proposal.save()  
+}
+
+export function handleProposalCanceled(event: ProposalCanceledEvent): void {
+    let proposalId = event.params.id.toString()
+    let proposal = Proposal.load(proposalId)
+    proposal.isCancel = true
+    proposal.save()  
 }

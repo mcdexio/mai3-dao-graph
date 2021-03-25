@@ -25,6 +25,10 @@ dataSources:
           handler: handleProposalCreated
         - event: ProposalExecuted(uint256)
           handler: handleProposalExecuted
+        - event: ProposalQueued(uint256,uint256)
+          handler: handleProposalQueued
+        - event: ProposalCanceled(uint256)
+          handler: handleProposalCanceled
         - event: VoteCast(address,uint256,bool,uint256)
           handler: handleVote
       file: ./src/governor.ts

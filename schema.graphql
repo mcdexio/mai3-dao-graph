@@ -27,6 +27,8 @@ type Proposal @entity {
     for: BigDecimal!
     against: BigDecimal!
     isExecuted: Boolean!
+    isCancel: Boolean!
+    eta: BigInt!
     timestamp: BigInt!
     votes: [Vote!] @derivedFrom(field: "proposal")
 }
