@@ -29,7 +29,7 @@ dataSources:
           handler: handleVote
       file: ./src/governor.ts
   - kind: ethereum/contract
-    name: Governor
+    name: XMCB
     network: {{network}}
     source:
       address: '{{xmcb_address}}'
