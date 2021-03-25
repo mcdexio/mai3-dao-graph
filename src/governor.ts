@@ -13,9 +13,11 @@ import {
     convertToDecimal,
     ZERO_BD,
     fetchUser,
+    fetchDao,
 } from './utils'
 
 export function handleProposalCreated(event: ProposalCreatedEvent): void {
+    let dao = fetchDao()
     let proposalId = event.params.id.toString()
     let proposal = new Proposal(proposalId)
     let user = fetchUser(event.params.proposer)
@@ -40,10 +42,12 @@ export function handleProposalCreated(event: ProposalCreatedEvent): void {
     proposal.against = ZERO_BD
     proposal.isExecuted = false
     proposal.save()
+    dao.proposalCount += 1
+    dao.save()
 }
   
 export function handleVote(event: VoteCastEvent): void {
-    let user = fetchUser(event.params.account)
+    let user = fetchUser(event.params.voter)
     let proposalId = event.address.toHexString()
         .concat("-")
         .concat(event.params.proposalId.toString())

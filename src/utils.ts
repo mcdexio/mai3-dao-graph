@@ -1,5 +1,5 @@
 import { log, BigInt, BigDecimal, Address } from '@graphprotocol/graph-ts'
-import { User } from '../generated/schema'
+import { User, Dao } from '../generated/schema'
 
 export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
 
@@ -31,4 +31,13 @@ export function fetchUser(address: Address): User {
         user.save()
     }
     return user as User
+}
+
+export function fetchDao(): Dao {
+    let dao = Dao.load("mcdexDao")
+    if (dao === null) {
+        dao = new Dao("mcdexDao")
+        dao.save()
+    }
+    return dao as Dao
 }
