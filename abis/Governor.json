@@ -15,11 +15,6 @@
         "internalType": "address",
         "name": "guardian_",
         "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "mcb_",
-        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -189,6 +184,19 @@
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MCB_TOKEN_ADDRESS",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -436,19 +444,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "mcb",
-    "outputs": [
-      {
-        "internalType": "contract IERC20Upgradeable",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",

@@ -37,6 +37,7 @@ export function fetchDao(): Dao {
     let dao = Dao.load("mcdexDao")
     if (dao === null) {
         dao = new Dao("mcdexDao")
+        dao.proposalCount = 0
         dao.save()
     }
     return dao as Dao
