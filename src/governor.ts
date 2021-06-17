@@ -44,6 +44,7 @@ export function handleProposalCreated(event: ProposalCreatedEvent): void {
     proposal.for = ZERO_BD
     proposal.against = ZERO_BD
     proposal.isExecuted = false
+    proposal.executedBlockNumber = ZERO_BI
     proposal.isCancel = false
     proposal.eta = ZERO_BI
     proposal.save()
@@ -74,6 +75,7 @@ export function handleProposalExecuted(event: ProposalExecutedEvent): void {
     let proposalId = event.params.id.toString()
     let proposal = Proposal.load(proposalId)
     proposal.isExecuted = true
+    proposal.executedBlockNumber = event.block.number
     proposal.save()
 }
 

@@ -27,6 +27,7 @@ type Proposal @entity {
     for: BigDecimal!
     against: BigDecimal!
     isExecuted: Boolean!
+    executedBlockNumber: BigInt!
     isCancel: Boolean!
     eta: BigInt!
     timestamp: BigInt!
