@@ -27,7 +27,7 @@ type Proposal @entity {
     for: BigDecimal!
     against: BigDecimal!
     isExecuted: Boolean!
-    executedBlockNumber: BigInt!
+    executedBlockNumber: BigInt! # this is a L2 blocknumber when proposal executed
     isCancel: Boolean!
     eta: BigInt!
     timestamp: BigInt!
