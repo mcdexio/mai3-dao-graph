@@ -2,5 +2,6 @@
     "network": "arb-rinkeby",
     "governor_address": "0xaf977F17EB9Fc0e1f42266b899f725E102503770",
     "xmcb_address": "0xee3f6Dc8168Fe907c24C50feCda14050147024F7",
+    "value_capture_address": "0xB25a6a1De2C17bfeEb721eaeeC470fbA9E0E0aFB",
     "start_block": 104694
 }
