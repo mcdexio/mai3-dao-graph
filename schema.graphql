@@ -1,6 +1,7 @@
 type Dao @entity {
     id: ID!
     proposalCount: Int!
+    totalCapturedUSD: BigDecimal!
 }
 
 type User @entity {

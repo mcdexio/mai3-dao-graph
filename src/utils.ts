@@ -38,6 +38,7 @@ export function fetchDao(): Dao {
     if (dao === null) {
         dao = new Dao("mcdexDao")
         dao.proposalCount = 0
+        dao.totalCapturedUSD = ZERO_BD
         dao.save()
     }
     return dao as Dao

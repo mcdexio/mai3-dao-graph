@@ -1,0 +1,6 @@
+{
+    "network": "arbitrum-one",
+    "governor_address": "0x8597eB9E005f39f8f70A17aeA914B20450ABfE60",
+    "xmcb_address": "0x1284c70F0ed8539F450584Ce937267F8C088B4cC",
+    "start_block": 50048
+}

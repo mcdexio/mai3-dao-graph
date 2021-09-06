@@ -52,3 +52,23 @@ dataSources:
         - event: DelegateChanged(indexed address,indexed address,indexed address)
           handler: handleDelegateChanged
       file: ./src/xmcb.ts
+  - kind: ethereum/contract
+    name: ValueCapture
+    network: {{network}}
+    source:
+      address: '{{value_capture_address}}'
+      abi: ValueCapture
+      startBlock: {{start_block}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Proposal
+      abis:
+        - name: ValueCapture
+          file: ./abis/ValueCapture.json
+      eventHandlers:
+        - event: SendValueCaptureNotification(indexed address,uint256,uint256)
+          handler: handleSendValueCaptureNotification
+      file: ./src/valueCapture.ts
